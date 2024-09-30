@@ -25,7 +25,7 @@ The generated wheel file located in the `/dist` folder can be used to install th
 ## Basic example
 
 As a basic example let's run MobilenetV2 using the the unify SDK.
-1. First make sure you have downloaded the `network.rpk` file from the [model zoo](https://github.com/SonySemiconductorSolutions/aitrios-rpi-model-zoo-dev/tree/feature-for-oss-release-check/models/classification/mobilenet_v2) (cfr. `models > classification > mobilenet_v2 > network.rpk`)
+1. First make sure you have downloaded the `imx500_network_mobilenet_v2.rpk` file from the [Model Zoo](https://github.com/raspberrypi/imx500-models/raw/main/imx500_network_mobilenet_v2.rpk)
 2. Create a new file `example.py` with the following content.
 
 ```python
@@ -36,7 +36,7 @@ from unify.models.post_processors import pp_cls
 class MobilenetV2(Model):
     def __init__(self):
         super().__init__(
-            model_file="./network.rpk",
+            model_file="./imx500_network_mobilenet_v2.rpk",
             model_type=MODEL_TYPE.PACKAGED,
             color_format=COLOR_FORMAT.RGB,
             preserve_aspect_ratio=True
@@ -51,7 +51,7 @@ device.deploy(model)
 
 with device as stream:
     for frame in stream:
-        print(detections)
+        print(frame.detections)
         frame.display()
 ```
 
@@ -63,18 +63,13 @@ with device as stream:
 
 Note that the unify API allows you to combine any network.rpk with your own custom post_processing function. Or choose any post processor function form the provided list inside `unify > models > post_processors`
 
-
-## Contributing
-
-TODO: Contribution policy (CONTRIBUTING.md)
-
 ## Releases
 
 Release tags must be of the format "\d+\.\d+\.\d+" example "1.0.4".
 
 ## License
 
-TODO
+[LICENSE](./LICENSE)
 
 ## Notice
 
